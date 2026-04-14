@@ -38,7 +38,7 @@ BOTS = [
     },
     {
         "name": "BOT-MBA",
-        "url":  "http://127.0.0.1:8002/webhook/tallos",
+        "url":  "http://127.0.0.1:8000/webhook/tallos",
 
         # Roteia para MBA quando tiver essas tags ou departamento
         "match_tags": ["mba", "pós", "pos-graduacao", "impacta mba"],
