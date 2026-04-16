@@ -120,7 +120,7 @@ def _matches(bot_cfg: Dict, info: Dict) -> bool:
 def _select_bots(body: Dict) -> List[Dict]:
     """Retorna a lista de bots que devem receber este evento."""
     info = _extract_routing_info(body)
-    logger.debug(f"[ROUTE] info={info}")
+    logger.info(f"[ROUTE] info={info}")
 
     # Primeiro tenta match específico
     specific = [b for b in BOTS if _matches(b, info)]
@@ -178,6 +178,14 @@ async def dispatch_tallos(request: Request):
         body = await request.json()
     except Exception:
         body = {}
+
+    # Log do payload recebido
+    info = _extract_routing_info(body)
+    logger.info(
+        f"[RECV] event={info['event_type']} | phone={info['phone']} | "
+        f"contact_id={info['contact_id']} | dept={info['dept']} | tags={info['tags']}"
+    )
+    logger.debug(f"[RECV] payload completo: {body}")
 
     # Deduplicação
     event_id = _extract_event_id(body)
